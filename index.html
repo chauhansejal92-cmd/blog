@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>My Professional Blog</title>
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Segoe UI', sans-serif;
+}
+
+body{
+    background: linear-gradient(135deg,#f5f7fa,#c3cfe2);
+    color:#222;
+    transition:0.4s;
+}
+
+/* DARK MODE */
+.dark{
+    background: linear-gradient(135deg,#0f0f0f,#1c1c1c);
+    color:#fff;
+}
+
+/* HEADER */
+header{
+    background: linear-gradient(135deg,#0d6efd,#6a11cb);
+    color:white;
+    padding:15px 40px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    position:sticky;
+    top:0;
+    z-index:100;
+    box-shadow:0 10px 25px rgba(0,0,0,0.2);
+    backdrop-filter: blur(10px);
+}
+
+.logo{
+    font-size:26px;
+    font-weight:800;
+    letter-spacing:1px;
+}
+
+nav ul{
+    display:flex;
+    list-style:none;
+    gap:20px;
+}
+
+nav a{
+    color:white;
+    text-decoration:none;
+    font-weight:600;
+    position:relative;
+}
+
+nav a::after{
+    content:'';
+    position:absolute;
+    width:0%;
+    height:2px;
+    background:white;
+    left:0;
+    bottom:-4px;
+    transition:0.3s;
+}
+
+nav a:hover::after{
+    width:100%;
+}
+
+/* BUTTON */
+.theme-btn{
+    border:none;
+    padding:10px 14px;
+    border-radius:8px;
+    cursor:pointer;
+    background:white;
+    color:#333;
+    font-weight:bold;
+    transition:0.3s;
+}
+
+.theme-btn:hover{
+    transform:scale(1.05);
+}
+
+/* HERO */
+.hero{
+    text-align:center;
+    padding:90px 20px;
+    background: linear-gradient(135deg,#ffffff,#e9f0ff);
+    border-radius:0 0 40px 40px;
+}
+
+.dark .hero{
+    background: linear-gradient(135deg,#1a1a1a,#2a2a2a);
+}
+
+.hero h1{
+    font-size:40px;
+    margin-bottom:10px;
+}
+
+.hero p{
+    font-size:18px;
+    opacity:0.8;
+}
+
+/* SEARCH */
+.search-box{
+    text-align:center;
+    margin:30px;
+}
+
+.search-box input{
+    width:80%;
+    max-width:500px;
+    padding:14px 18px;
+    border-radius:30px;
+    border:none;
+    outline:none;
+    box-shadow:0 5px 15px rgba(0,0,0,0.1);
+    font-size:16px;
+}
+
+/* BLOG GRID */
+.blog-container{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+    gap:25px;
+    padding:30px;
+}
+
+/* CARD */
+.card{
+    background:white;
+    border-radius:18px;
+    overflow:hidden;
+    box-shadow:0 10px 25px rgba(0,0,0,0.15);
+    transition:0.4s;
+    transform:translateY(0);
+}
+
+.card:hover{
+    transform:translateY(-10px);
+}
+
+.dark .card{
+    background:#1f1f1f;
+}
+
+/* IMAGE */
+.img-box{
+    width:100%;
+    height:200px;
+    overflow:hidden;
+}
+
+.img-box img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    transition:0.4s;
+}
+
+.card:hover img{
+    transform:scale(1.1);
+}
+
+/* CONTENT */
+.card-content{
+    padding:20px;
+}
+
+.card-content h3{
+    margin-bottom:10px;
+}
+
+/* BUTTON */
+.btn{
+    display:inline-block;
+    background: linear-gradient(135deg,#0d6efd,#6a11cb);
+    color:white;
+    border:none;
+    padding:10px 15px;
+    border-radius:10px;
+    cursor:pointer;
+    transition:0.3s;
+    font-weight:600;
+}
+
+.btn:hover{
+    transform:scale(1.05);
+    box-shadow:0 8px 20px rgba(0,0,0,0.2);
+}
+
+/* POST VIEW */
+#postView{
+    display:none;
+    padding:40px;
+    max-width:900px;
+    margin:auto;
+}
+
+#postView img{
+    width:100%;
+    border-radius:15px;
+    margin:15px 0;
+    box-shadow:0 10px 25px rgba(0,0,0,0.2);
+}
+
+.back-btn{
+    background:#ff4d4d;
+}
+
+.contact-btn{
+    background:#28a745;
+}
+
+/* ABOUT */
+.about{
+    padding:80px 20px;
+    text-align:center;
+}
+
+.about-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+    gap:20px;
+    margin-top:40px;
+}
+
+.about-card{
+    background:white;
+    padding:20px;
+    border-radius:15px;
+    box-shadow:0 10px 25px rgba(0,0,0,0.1);
+    transition:0.3s;
+}
+
+.about-card:hover{
+    transform:translateY(-8px);
+}
+
+.dark .about-card{
+    background:#1f1f1f;
+}
+
+/* CONTACT */
+.contact{
+    padding:60px 20px;
+    text-align:center;
+}
+
+.contact-card{
+    background:white;
+    padding:25px;
+    border-radius:15px;
+    box-shadow:0 10px 25px rgba(0,0,0,0.1);
+    transition:0.3s;
+}
+
+.dark .contact-card{
+    background:#1f1f1f;
+}
+
+.contact-card:hover{
+    transform:translateY(-5px);
+}
+
+.contact input,
+.contact textarea,
+.contact select{
+    width:100%;
+    padding:12px;
+    margin:10px 0;
+    border-radius:8px;
+    border:1px solid #ddd;
+    outline:none;
+}
+
+/* FOOTER */
+footer{
+    background: linear-gradient(135deg,#0d6efd,#6a11cb);
+    color:white;
+    text-align:center;
+    padding:25px;
+    margin-top:50px;
+    border-radius:30px 30px 0 0;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+<div class="logo">MyBlog</div>
+
+<nav>
+<ul>
+<li><a href="#" onclick="showHome()">Home</a></li>
+<li><a href="#" onclick="showHome()">Blog</a></li>
+<li><a href="#about">About</a></li>
+<li><a href="#contact">Contact</a></li>
+</ul>
+</nav>
+
+<button class="theme-btn" id="themeBtn">🌙 Dark</button>
+</header>
+
+<!-- HOME -->
+<section id="homeView">
+
+<div class="hero">
+<h1>Professional Blog Website</h1>
+<p>Read Amazing Articles in English</p>
+</div>
+
+<div class="search-box">
+<input type="text" id="searchInput" placeholder="Search blog posts...">
+</div>
+
+<section class="blog-container" id="blogContainer"></section>
+
+</section>
+
+<!-- POST VIEW -->
+<section id="postView"></section>
+<!-- ABOUT (WITH IMAGE) -->
+<section class="about" id="about">
+
+<h2>About Us</h2>
+
+<!-- IMAGE BOX -->
+<div style="max-width:900px;margin:20px auto;">
+    <img src="sa.jpg" alt="About Us Image"
+    style="width:100%;max-height:400px;object-fit:cover;border-radius:12px;box-shadow:0 5px 20px rgba(0,0,0,0.2);">
+</div>
+
+<p>Welcome to MyBlog, a modern and simple platform created for readers who want to learn<br>
+    and grow their knowledge in technology, programming, and web development.<br>
+     Our main goal is to provide high-quality, easy-to-understand content that helps beginners as well <br>
+     as intermediate learners improve their skills <br>
+     step by step. We believe that learning should be simple, practical, and enjoyable for everyone.
+
+<div class="about-grid">
+
+<div class="about-card">
+<h3>🚀 Mission</h3>
+<p>Make learning simple and practical for everyone.</p>
+</div>
+
+<div class="about-card">
+<h3>💡 Content</h3>
+<p>We share blogs on programming, design, and skills.</p>
+</div>
+
+<div class="about-card">
+<h3>🌍 Vision</h3>
+<p>Build a global learning community for developers.</p>
+</div>
+
+</div>
+
+
+<!-- CONTACT -->
+<section class="contact" id="contact">
+
+<h2 style="text-align:center;font-size:32px;margin-bottom:20px;">Contact Us</h2>
+
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:30px;max-width:1000px;margin:auto;">
+
+<!-- CONTACT INFO -->
+<div class="contact-card">
+
+<h3>📞 Get in Touch</h3>
+
+<p style="margin-top:10px;line-height:1.7;">
+If you have any questions, suggestions, or business inquiries, feel free to contact us. We usually respond within 24–48 hours.
+</p>
+
+<div style="margin-top:20px;line-height:2;">
+<p>📧 Email: chauhansejal92@gmail.com</p>
+<p>📱 Phone: +917876766568</p>
+<p>📍 Location: chandigarh</p>
+</div>
+
+</div>
+
+<!-- CONTACT FORM -->
+<div class="contact-card">
+
+<form>
+
+<input type="text" placeholder="Your Full Name" required>
+
+<input type="email" placeholder="Your Email Address" required>
+
+
+
+
+
+<textarea rows="6" placeholder="Write your message here..." required></textarea>
+
+<button class="btn" type="submit" style="width:100%;">Send Message</button>
+
+</form>
+
+</div>
+
+</div>
+
+</section>
+
+<footer>
+<h3>MyBlog</h3>
+<p>© 2026 All Rights Reserved</p>
+</footer>
+
+<script>
+const posts = [
+{
+id:1,
+title:"How To Start Blogging",
+image:"ch.jpeg",
+content:`Blogging is one of the most powerful digital skills in today’s online world. It is not just about writing articles, but it is about sharing knowledge, building authority, and creating a long-term online presence. Many people start blogging as a hobby, but with the right strategy, it can become a full-time income source.
+
+To start blogging, the first step is choosing a niche. A niche means selecting a specific topic like technology, travel, education, health, or personal development. Choosing the right niche is important because it defines your audience. If you try to write about everything, you will fail to build a strong audience base.
+
+After selecting a niche, the next step is choosing a platform. You can use WordPress, Blogger, or even build your own website. WordPress is the most popular because it is flexible and beginner-friendly. Once your blog is set up, focus on creating high-quality content.
+
+Content is the heart of blogging. If your content is useful, people will automatically come back. You should always write in simple language, provide real examples, and solve problems for readers. SEO (Search Engine Optimization) is also very important. It helps your blog rank on Google so more people can find it.
+
+Consistency is another key factor. Many beginners quit after writing 2–3 posts because they don’t see results. But blogging takes time. You should regularly publish posts, even if traffic is low in the beginning.
+
+Over time, as your content grows, your blog will start getting organic traffic. You can monetize it using ads, affiliate marketing, or digital products. Blogging is not a shortcut to success, but it is a long-term digital asset that can give freedom and income if done correctly.`
+},
+
+{
+id:2,
+title:"CSS Design Secrets",
+image:"img.jpeg",
+content:`CSS (Cascading Style Sheets) is the backbone of modern web design. It is used to control the appearance of websites, including layout, colors, fonts, spacing, and animations. Without CSS, websites would look plain and unattractive.
+
+One of the most powerful features of CSS is Flexbox. Flexbox helps in designing one-dimensional layouts where you can easily align items horizontally or vertically. Another advanced system is CSS Grid, which allows you to create complex two-dimensional layouts. Both of these tools are essential for modern responsive design.
+
+Responsive design means your website should work perfectly on all devices like mobile, tablet, and desktop. This is achieved using media queries. Media queries allow you to change styles based on screen size.
+
+CSS also provides animations and transitions that make websites more interactive. For example, hover effects, smooth color changes, and moving elements improve user experience. A good UI design always feels smooth and modern.
+
+Color theory is another important part of CSS design. Choosing the right colors creates a strong visual impact. Bad color combinations can make a website look unprofessional, while good combinations build trust and engagement.
+
+Typography also plays a major role. Fonts should be readable and consistent across the website. Proper spacing, padding, and alignment make content easier to read.
+
+In conclusion, mastering CSS is essential for any web developer. It transforms simple HTML into beautiful, professional websites that attract users and improve engagement.`
+},
+
+{
+id:3,
+title:"JavaScript Tips",
+image:"sej.jpeg",
+content:`JavaScript is one of the most important programming languages in modern web development. It is used to make websites interactive, dynamic, and user-friendly. Without JavaScript, websites would be static and limited in functionality.
+
+The most important concept in JavaScript is the DOM (Document Object Model). The DOM allows you to interact with HTML elements using code. You can change text, update styles, hide elements, or create new content dynamically.
+
+Another important feature is event handling. Events like clicks, mouse movements, keyboard input, and form submissions are controlled using JavaScript. This is what makes websites interactive.
+
+Asynchronous programming is also a key concept. Using Promises and async/await, developers can handle API requests without blocking the main thread. This is important for performance and smooth user experience.
+
+JavaScript also includes modern ES6+ features like arrow functions, template literals, destructuring, and modules. These features make code shorter, cleaner, and easier to understand.
+
+To master JavaScript, practice is very important. You should build small projects like calculators, to-do apps, weather apps, and simple games. These projects help improve logical thinking and problem-solving skills.
+
+JavaScript is also used in frontend frameworks like React and Vue, and backend development using Node.js. This makes it a full-stack language.
+
+In conclusion, learning JavaScript opens the door to many career opportunities in web development and software engineering.`
+}
+];
+
+const container = document.getElementById("blogContainer");
+
+function loadPosts(){
+container.innerHTML="";
+posts.forEach(p=>{
+container.innerHTML += `
+<div class="card">
+
+<div class="img-box">
+<img src="${p.image}">
+</div>
+
+<div class="card-content">
+<h3>${p.title}</h3>
+<p>${p.content.substring(0,80)}...</p>
+<button class="btn" onclick="openPost(${p.id})">Read More</button>
+</div>
+
+</div>`;
+});
+}
+
+loadPosts();
+
+function openPost(id){
+const post = posts.find(p=>p.id===id);
+
+document.getElementById("homeView").style.display="none";
+document.getElementById("contact").style.display="none";
+document.getElementById("about").style.display="none";
+document.getElementById("postView").style.display="block";
+
+document.getElementById("postView").innerHTML=`
+<button class="btn back-btn" onclick="showHome()">← Back</button>
+
+
+</button>
+
+<h1>${post.title}</h1>
+
+<img src="${post.image}">
+
+<p style="margin-top:20px;line-height:1.9;font-size:18px;">
+${post.content}
+</p>
+`;
+}
+
+function showHome(){
+document.getElementById("homeView").style.display="block";
+document.getElementById("contact").style.display="block";
+document.getElementById("about").style.display="block";
+document.getElementById("postView").style.display="none";
+}
+
+document.getElementById("searchInput").addEventListener("keyup",e=>{
+let value=e.target.value.toLowerCase();
+document.querySelectorAll(".card").forEach(card=>{
+let title=card.querySelector("h3").innerText.toLowerCase();
+card.style.display=title.includes(value)?"block":"none";
+});
+});
+
+document.getElementById("themeBtn").onclick=()=>{
+document.body.classList.toggle("dark");
+};
+
+</script>
+
+</body>
+</html>
